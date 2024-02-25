@@ -1,0 +1,37 @@
+# Dossier .vscode qui contient les paramètres spécifiques à l'éditeur
+.vscode/
+
+# Fichiers de cache de l'éditeur
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Autres fichiers et dossiers à ignorer
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+static/
+*.log
+*.pot
+.env
+venv/
+*.pyo
+*.pyd
+*.pyc
+*.pyo
+*.so
+*.dylib
+*.test
+*.exe
+*.dll
+*.obj
+*.exp
+*.lib
+*.pdb
+*.cache
+*.egg-info/
+dist/
+build/
+docs/_build/
