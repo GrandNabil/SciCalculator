@@ -19,10 +19,10 @@ def home(request):
                     conversion_result = f"Adresse IPv4 binaire {ip_input} convertie en décimal: {converted_ip}"
                 else:
                     conversion_result = "Type d'adresse IP non reconnu."
-                return render(request, 'conversion/home.html', {'form': form, 'conversion_result': conversion_result})
+                return render(request, 'home.html', {'form': form, 'conversion_result': conversion_result})
             else:
                 converted_numbers = convert_bases(number, base)
-                return render(request, 'conversion/home.html', {'form': form, 'converted_numbers': converted_numbers})
+                return render(request, 'home.html', {'form': form, 'converted_numbers': converted_numbers})
     else:
         form = ConversionForm()
-    return render(request, 'conversion/home.html', {'form': form})
+    return render(request, 'home.html', {'form': form})
