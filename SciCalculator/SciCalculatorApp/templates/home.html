@@ -16,8 +16,8 @@
         <p>{{ conversion_result }}</p>
     {% elif converted_numbers %}
         <p>Conversion de {{ form.number.value }} en base {{ form.base.value }}:</p>
-        {% for idx, value in enumerate(converted_numbers) %}
-            <p>Base {{ ['Décimal', 'Binaire', 'Octal', 'Hexadécimal'][idx] }}: {{ value }}</p>
+        {% for idx, value in converted_numbers.items %}
+            <p>Base {{ idx }}: {{ value }}</p>
         {% endfor %}
     {% endif %}
 </body>
