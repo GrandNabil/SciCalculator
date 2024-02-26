@@ -1,26 +1,24 @@
-<div class="center">
-    <h1>SCI Calculator</h1>
-    
-    <form action="result">
-        <input type="number" name="number1" placeholder="Enter first number">
-        <br>
-        <br> 
-        <input type="number" name="number2" placeholder="Enter second number">
-        <br>
-        <br>
-        <button type="submit" name="add">Add</button>
-        <button type="submit" name="subtract">Subtract</button>
-        <button type="submit" name="multiply">Multiply</button>
-        <button type="submit" name="divide">Divide</button>
-    
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion</title>
+</head>
+<body>
+    <h1>Conversion</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Convertir</button>
     </form>
-    </div>
-    
-    <style>
-      .center {
-        margin: auto;
-        width: 60%;
-        border: 3px solid #a5addb;
-        padding: 10px;
-      }
-    </style>
+    {% if conversion_result %}
+        <p>{{ conversion_result }}</p>
+    {% elif converted_numbers %}
+        <p>Conversion de {{ form.number.value }} en base {{ form.base.value }}:</p>
+        {% for idx, value in enumerate(converted_numbers) %}
+            <p>Base {{ ['Décimal', 'Binaire', 'Octal', 'Hexadécimal'][idx] }}: {{ value }}</p>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
