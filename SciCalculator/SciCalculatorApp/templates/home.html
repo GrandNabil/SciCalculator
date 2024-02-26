@@ -3,22 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversion</title>
+    <title>Bienvenue</title>
 </head>
 <body>
-    <h1>Conversion</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Convertir</button>
-    </form>
-    {% if conversion_result %}
-        <p>{{ conversion_result }}</p>
-    {% elif converted_numbers %}
-        <p>Conversion de {{ form.number.value }} en base {{ form.base.value }}:</p>
-        {% for idx, value in converted_numbers.items %}
-            <p>Base {{ idx }}: {{ value }}</p>
-        {% endfor %}
-    {% endif %}
+    <h1>Bienvenue sur notre application de conversion !</h1>
+    <p>Que souhaitez-vous convertir ?</p>
+    <a href="{% url 'ip_conversion' %}"><button>Convertir une adresse IP</button></a>
+    <a href="{% url 'number_conversion' %}"><button>Convertir un nombre</button></a>
 </body>
 </html>

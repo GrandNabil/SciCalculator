@@ -3,6 +3,10 @@ from .forms import NumberConversionForm, IPConversionForm
 from .conversion_base import convert_bases
 from .conversion_ip import ipv4_decimal_to_binary, ipv4_binary_to_decimal
 
+def home(request):
+    return render(request, 'home.html')
+
+
 def number_conversion(request):
     if request.method == 'POST':
         form = NumberConversionForm(request.POST)
@@ -10,10 +14,10 @@ def number_conversion(request):
             number = form.cleaned_data['number']
             base = form.cleaned_data['base']
             converted_numbers = convert_bases(number, base)
-            return render(request, 'conversion/number_conversion.html', {'form': form, 'converted_numbers': converted_numbers})
+            return render(request, 'number_conversion.html', {'form': form, 'converted_numbers': converted_numbers})
     else:
         form = NumberConversionForm()
-    return render(request, 'conversion/number_conversion.html', {'form': form})
+    return render(request, 'number_conversion.html', {'form': form})
 
 def ip_conversion(request):
     if request.method == 'POST':
@@ -29,7 +33,7 @@ def ip_conversion(request):
                 conversion_result = f"Adresse IPv4 binaire {ip_input} convertie en décimal: {converted_ip}"
             else:
                 conversion_result = "Type d'adresse IP non reconnu."
-            return render(request, 'conversion/ip_conversion.html', {'form': form, 'conversion_result': conversion_result})
+            return render(request, 'ip_conversion.html', {'form': form, 'conversion_result': conversion_result})
     else:
         form = IPConversionForm()
-    return render(request, 'conversion/ip_conversion.html', {'form': form})
+    return render(request, 'ip_conversion.html', {'form': form})
