@@ -8,18 +8,18 @@ def home(request):
 
 
 def number_conversion(request):
-    if request.method == 'POST':
-        if request.method == 'POST':
-            num = int(request.POST.get('number'))
-            decimal = num
-            binary = convert_to_binary(num)
-            octal = convert_to_octal(num)
-            hexadecimal = convert_to_hexadecimal(num)
-        return render(request, 'conversion_base.html', {'decimal': decimal, 'binary': binary, 'octal': octal, 'hexadecimal': hexadecimal})
-    #return render(request, 'conversion_base.html')
+    form = NumberConversionForm(request.POST or None)
+    resultats = {}
+    if form.is_valid():
+        nombre = form.cleaned_data['nombre']
+        resultats['decimal'] = nombre
+        resultats['binaire'] = convertir_en_binaire(nombre)
+        resultats['octal'] = convertir_en_octal(nombre)
+        resultats['hexadecimal'] = convertir_en_hexadecimal(nombre)
     return render(request, 'conversion_base.html', {'form': form})
 
 def ip_conversion(request):
+    form = IPConversionForm()
     if request.method == 'POST':
         decimal_ip = request.POST.get('decimal_ip')
         binary_ip = decimal_to_binary(decimal_ip)

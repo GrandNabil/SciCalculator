@@ -12,11 +12,5 @@
         {{ form.as_p }}
         <button type="submit">Convertir</button>
     </form>
-    {% if converted_numbers %}
-        <p>Conversion de {{ form.number.value }} en base {{ form.base.value }}:</p>
-        {% for idx, value in converted_numbers.items %}
-            <p>Base {{ idx }}: {{ value }}</p>
-        {% endfor %}
-    {% endif %}
 </body>
 </html>

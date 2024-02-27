@@ -1,13 +1,8 @@
 from django import forms
 
 class NumberConversionForm(forms.Form):
-    CHOICES = [('d', 'Décimal'), ('b', 'Binaire'), ('o', 'Octal'), ('h', 'Hexadécimal')]
-    number = forms.CharField(label="Nombre", required=False)
-    base = forms.ChoiceField(label="Base", choices=CHOICES)
-    decimal_result = forms.CharField(label="Décimal", required=False)
-    binary_result = forms.CharField(label="Binaire", required=False)
-    octal_result = forms.CharField(label="Octal", required=False)
-    hexadecimal_result = forms.CharField(label="Hexadécimal", required=False)
+
+    number = forms.IntegerField(label="Entrez le nombre à convertir:")
 
 class IPConversionForm(forms.Form):
     ip_decimal = forms.CharField(label="Adresse IP Décimale", required=False)
