@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import NumberConversionForm, IPConversionForm
-from .conversion_base import convert_bases
-from .conversion_ip import ipv4_decimal_to_binary, ipv4_binary_to_decimal
+from .conversion_base import convert_to_binary, convert_to_octal, convert_to_hexadecimal
+from .conversion_ip import decimal_to_binary
 
 def home(request):
     return render(request, 'home.html')
@@ -9,31 +9,20 @@ def home(request):
 
 def number_conversion(request):
     if request.method == 'POST':
-        form = NumberConversionForm(request.POST)
-        if form.is_valid():
-            number = form.cleaned_data['number']
-            base = form.cleaned_data['base']
-            converted_numbers = convert_bases(number, base)
-            return render(request, 'number_conversion.html', {'form': form, 'converted_numbers': converted_numbers})
-    else:
-        form = NumberConversionForm()
-    return render(request, 'number_conversion.html', {'form': form})
+        if request.method == 'POST':
+            num = int(request.POST.get('number'))
+            decimal = num
+            binary = convert_to_binary(num)
+            octal = convert_to_octal(num)
+            hexadecimal = convert_to_hexadecimal(num)
+        return render(request, 'conversion_base.html', {'decimal': decimal, 'binary': binary, 'octal': octal, 'hexadecimal': hexadecimal})
+    #return render(request, 'conversion_base.html')
+    return render(request, 'conversion_base.html', {'form': form})
 
 def ip_conversion(request):
     if request.method == 'POST':
-        form = IPConversionForm(request.POST)
-        if form.is_valid():
-            ip_input = form.cleaned_data['ip_input']
-            ip_type = form.cleaned_data['ip_type']
-            if ip_type == 'decimal':
-                converted_ip = ipv4_decimal_to_binary(ip_input)
-                conversion_result = f"Adresse IPv4 décimale {ip_input} convertie en binaire: {converted_ip}"
-            elif ip_type == 'binary':
-                converted_ip = ipv4_binary_to_decimal(ip_input)
-                conversion_result = f"Adresse IPv4 binaire {ip_input} convertie en décimal: {converted_ip}"
-            else:
-                conversion_result = "Type d'adresse IP non reconnu."
-            return render(request, 'ip_conversion.html', {'form': form, 'conversion_result': conversion_result})
-    else:
-        form = IPConversionForm()
-    return render(request, 'ip_conversion.html', {'form': form})
+        decimal_ip = request.POST.get('decimal_ip')
+        binary_ip = decimal_to_binary(decimal_ip)
+        return render(request, 'conversion_ip.html', {'binary_ip': binary_ip})
+    #return render(request, 'conversion_ip.html')
+    return render(request, 'conversion_ip.html', {'form': form})

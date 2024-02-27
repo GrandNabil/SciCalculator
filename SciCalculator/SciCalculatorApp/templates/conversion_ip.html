@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversion de nombres</title>
+    <title>Conversion d'adresses IP</title>
 </head>
 <body>
-    <h1>Conversion de nombres</h1>
+    <h1>Conversion d'adresses IP</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Convertir</button>
     </form>
-    {% if converted_numbers %}
-        <p>Conversion de {{ form.number.value }} en base {{ form.base.value }}:</p>
-        {% for idx, value in converted_numbers.items %}
-            <p>Base {{ idx }}: {{ value }}</p>
-        {% endfor %}
+    {% if conversion_result %}
+        <p>{{ conversion_result }}</p>
     {% endif %}
 </body>
 </html>
