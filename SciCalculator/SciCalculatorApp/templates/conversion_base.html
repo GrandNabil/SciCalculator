@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversion de nombres</title>
 </head>
 <body>
@@ -12,5 +10,14 @@
         {{ form.as_p }}
         <button type="submit">Convertir</button>
     </form>
+    {% if resultats %}
+        <h2>Résultats :</h2>
+        <ul>
+            <li>Nombre décimal : {{ resultats.decimal }}</li>
+            <li>Nombre binaire : {{ resultats.binaire }}</li>
+            <li>Nombre octal : {{ resultats.octal }}</li>
+            <li>Nombre hexadécimal : {{ resultats.hexadecimal }}</li>
+        </ul>
+    {% endif %}
 </body>
 </html>

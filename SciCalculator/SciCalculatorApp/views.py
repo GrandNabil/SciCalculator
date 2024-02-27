@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import NumberConversionForm, IPConversionForm
-from .conversion_base import convert_to_binary, convert_to_octal, convert_to_hexadecimal
+from .conversion_base import conversion_binaire, conversion_hexadecimal, conversion_octal
 from .conversion_ip import decimal_to_binary
 
 def home(request):
@@ -13,10 +13,10 @@ def number_conversion(request):
     if form.is_valid():
         nombre = form.cleaned_data['nombre']
         resultats['decimal'] = nombre
-        resultats['binaire'] = convertir_en_binaire(nombre)
-        resultats['octal'] = convertir_en_octal(nombre)
-        resultats['hexadecimal'] = convertir_en_hexadecimal(nombre)
-    return render(request, 'conversion_base.html', {'form': form})
+        resultats['binaire'] = conversion_binaire(nombre)
+        resultats['octal'] = conversion_octal(nombre)
+        resultats['hexadecimal'] = conversion_hexadecimal(nombre)
+    return render(request, 'conversion_base.html', {'form': form, 'resultats': resultats})
 
 def ip_conversion(request):
     form = IPConversionForm()
