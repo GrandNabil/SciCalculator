@@ -1,4 +1,4 @@
-def conversion_binary(num):
+def conversion_binaire(num):
     return bin(num)
 
 def conversion_octal(num):
