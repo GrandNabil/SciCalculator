@@ -5,5 +5,5 @@ class NumberConversionForm(forms.Form):
     num = forms.IntegerField(label="Entrez le nombre à convertir:")
 
 class IPConversionForm(forms.Form):
-    ip_decimal = forms.CharField(label="Adresse IP Décimale", required=False)
-    ip_binary = forms.CharField(label="Adresse IP Binaire", required=False)
+    
+    ip_address = forms.CharField(label='Entrez l\'adresse IP')

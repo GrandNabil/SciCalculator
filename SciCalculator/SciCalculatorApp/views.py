@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import NumberConversionForm, IPConversionForm
 from .conversion_base import conversion_binaire, conversion_hexadecimal, conversion_octal
-from .conversion_ip import decimal_to_binary
+from .conversion_ip import ip_to_binary
 
 def home(request):
     return render(request, 'home.html')
@@ -19,10 +19,10 @@ def number_conversion(request):
     return render(request, 'conversion_base.html', {'form': form, 'resultats': resultats})
 
 def ip_conversion(request):
-    form = IPConversionForm()
-    if request.method == 'POST':
-        decimal_ip = request.POST.get('decimal_ip')
-        binary_ip = decimal_to_binary(decimal_ip)
-        return render(request, 'conversion_ip.html', {'binary_ip': binary_ip})
-    #return render(request, 'conversion_ip.html')
-    return render(request, 'conversion_ip.html', {'form': form})
+    form = IPConversionForm(request.POST or None)
+    ip_binaire = None
+    if request.method == 'POST' and form.is_valid():
+        ip_address = form.cleaned_data['ip_address']
+        ip_binaire = ip_to_binary(ip_address)
+
+    return render(request, 'conversion_ip.html', {'form': form, 'ip_binaire': ip_binaire})
