@@ -11,11 +11,11 @@ def number_conversion(request):
     form = NumberConversionForm(request.POST or None)
     resultats = {}
     if form.is_valid():
-        nombre = form.cleaned_data['nombre']
-        resultats['decimal'] = nombre
-        resultats['binaire'] = conversion_binaire(nombre)
-        resultats['octal'] = conversion_octal(nombre)
-        resultats['hexadecimal'] = conversion_hexadecimal(nombre)
+        num = form.cleaned_data['num']
+        resultats['decimal'] = num
+        resultats['binaire'] = conversion_binaire(num)
+        resultats['octal'] = conversion_octal(num)
+        resultats['hexadecimal'] = conversion_hexadecimal(num)
     return render(request, 'conversion_base.html', {'form': form, 'resultats': resultats})
 
 def ip_conversion(request):
